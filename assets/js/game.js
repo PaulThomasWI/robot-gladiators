@@ -65,11 +65,11 @@ var enemyInfo = [
 
 var playerInfo = {
   name: getPlayerName(),
-  health: 100, 
+  health: 200, 
   attack: 10,
   money: 10,
   reset: function() {
-    this.health = 100;
+    this.health = 200;
     this.money = 10;
     this.attack = 10;
   },
@@ -224,6 +224,21 @@ var endGame = function() {
   // if player is still alive, player wins!
   if (playerInfo.health > 0) {
     window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + ".");
+
+    debugger;
+
+    myStoredHighScore = localStorage.getItem("highScore");
+    if (myStoredHighScore === null) {
+      localStorage.setItem("highScore", playerInfo.money);
+      alert("We are setting this as your high score.");
+    }
+    else if (myStoredHighScore > playerInfo.money) {
+      alert("You won, but you've done better.");
+    }
+    else {
+      localStorage.setItem("highScore", playerInfo.money);
+      alert("This is your best match yet!");
+    }
   } 
   else {
     window.alert("You've lost your robot in battle.");
